@@ -1,4 +1,6 @@
-grafana: # Visualize metrics from Prometheus
+version: "3.7"
+services:
+  grafana: # Visualize metrics from Prometheus
     image: grafana/grafana-enterprise
     container_name: grafana
     hostname: grafana
@@ -6,7 +8,7 @@ grafana: # Visualize metrics from Prometheus
       - 3000:3000
     volumes:
       - ./grafana:/etc/grafana # Configuration file
-      - grafana_data:/var/lib/grafana
+      - ./grafana:/var/lib/grafana
     restart: always
 
   prometheus: # OSS for server/system monitoring
@@ -15,9 +17,8 @@ grafana: # Visualize metrics from Prometheus
     hostname: prometheus
     volumes:
       - ./prometheus:/etc/prometheus # Configuration file
-      - metrics_data:/prometheus
+      - ./metrics:/prometheus
     ports:
       - 9090:9090
     restart: always
-    networks:
-      - prom
+
