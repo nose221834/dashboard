@@ -9,6 +9,7 @@ services:
     volumes:
       - ./grafana/config:/etc/grafana
       - ./grafana/data:/var/lib/grafana
+    user: "1000"
     depends_on:
       - prometheus
     networks:
@@ -21,6 +22,7 @@ services:
     volumes:
       - ./prometheus:/etc/prometheus
       - ./metrics:/prometheus
+    user: "1000"
     ports:
       - 9090:9090
     networks:
