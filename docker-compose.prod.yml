@@ -10,30 +10,23 @@ services:
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
-    hostname: grafana
+    stdin_open: true
+    tty: true
     ports:
       - 3000:3000
     volumes:
       - ./grafana/config:/etc/grafana
       - ./grafana/data:/var/lib/grafana
-    user: "1000"
     depends_on:
       - prometheus
-    networks:
-      - monitoring
 
   prometheus:
     image: prom/prometheus
     container_name: prometheus
-    hostname: prometheus
+    stdin_open: true
+    tty: true
     volumes:
       - ./prometheus:/etc/prometheus
       - ./metrics:/prometheus
-    user: "1000"
     ports:
       - 9090:9090
-    networks:
-      - monitoring
-
-networks:
-  monitoring:
